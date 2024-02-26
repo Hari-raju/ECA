@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "253501509540",
+    "project_id": "elderly-care-application",
+    "storage_bucket": "elderly-care-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253501509540:android:62935b475bcebcf4b2fb31",
+        "android_client_info": {
+          "package_name": "com.raju.elderlycareapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZuEltgpEYUG9qkl9kdKhVFw0i87NXRzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

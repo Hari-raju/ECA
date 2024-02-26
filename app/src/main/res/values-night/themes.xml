@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ElderlyCareApplication" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="hintTextColor">@color/white</item>
+    </style>
+
+<!--    Image Button color style in Night mode-->
+    <style name="imageColor">
+        <item name="tint">@color/white</item>
+    </style>
+
+<!--Text color style in Night mode-->
+    <style name="textColors" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="dateButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/white</item>
+        <item name="iconTint">@color/white</item>
+    </style>
+
+    <style name="pinHintClr" parent="PinWidget.PinView">
+        <item name="hintTextColor">@color/white</item>
+        <item name="cursorColor">@color/white</item>
+    </style>
+</resources>

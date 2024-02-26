@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    app:cardElevation="@dimen/_20sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_8sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/_5sdp"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+        
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/user"
+            android:elevation="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_oval="true"
+            android:background="@drawable/round_bg"
+            android:scaleType="centerCrop"
+            android:id="@+id/connected_elder_profile"/>
+
+        <TextView
+            android:id="@+id/connectedElderName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/username"
+            app:layout_constraintBottom_toTopOf="@id/connectedElderPhone"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/connected_elder_profile"
+            app:layout_constraintTop_toTopOf="@id/connected_elder_profile" />
+
+        <TextView
+            android:id="@+id/connectedElderPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/xxxxxx"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/connectedElderName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/connected_elder_profile"
+            app:layout_constraintTop_toBottomOf="@id/connectedElderName"
+            app:layout_constraintBottom_toTopOf="@id/button_container"/>
+
+
+        <LinearLayout
+            android:id="@+id/button_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:weightSum="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/connected_elder_profile"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_weight="1.8"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/myBlue"
+                app:cornerRadius="@dimen/_8sdp"
+                android:text="@string/add_medication"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:id="@+id/addMed"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:elevation="@dimen/_10sdp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_weight="1.8"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/myBlue"
+                app:cornerRadius="@dimen/_8sdp"
+                android:text="@string/add_checkup"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:id="@+id/addCheckup"
+                android:elevation="@dimen/_10sdp"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+</androidx.cardview.widget.CardView>

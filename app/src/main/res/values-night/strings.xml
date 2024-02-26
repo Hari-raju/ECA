@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello !</string>
+    <string name="login_as_elder">Login as Elder</string>
+    <string name="login_as_caretaker">Login as Caretaker</string>
+    <string name="welcome_back_elder">Welcome Back Elder</string>
+    <string name="login_to_continue">Login To Continue</string>
+    <string name="phone">Phone</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="create_a_account">Create a Account!</string>
+    <string name="welcome_back_caretaker">Welcome Back Caretaker</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="next">NEXT</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="username">Username</string>
+    <string name="elder_name">Elder Name</string>
+    <string name="enter_your_medical_description">Enter your medical description!</string>
+    <string name="_01_01_1950">01/01/1950</string>
+    <string name="otp_verification">Otp Verification</string>
+    <string name="please_enter_otp_sent_your_number_n_xx_xxxxxxxxxx">Please enter otp sent your number\n+XX XXXXXXXXXX</string>
+    <string name="xxxxxx">XXXXXX</string>
+    <string name="verify">VERIFY</string>
+    <string name="select_your_d_o_b">Select your D.O.B :</string>
+    <string name="add_a_profile">Add a profile</string>
+    <string name="done">DONE</string>
+    <string name="connect_elder">Connect Elder\'s</string>
+    <string name="view_elder">View Elder\'s</string>
+    <string name="account">Account</string>
+    <string name="send_report">Send Report</string>
+    <string name="resend_otp_in_60_seconds">Resend OTP in 60 seconds</string>
+    <string name="connect_to_elder">Connect To Elder\'s</string>
+    <string name="elder_s_number">Elder\'s Number</string>
+    <string name="connect">Connect</string>
+    <string name="connected_elder_s">Connected Elder\'s</string>
+    <string name="no_elder_s_found">No Elder\'s Found</string>
+    <string name="add_medication">Add Medication</string>
+    <string name="add_checkup">Add CheckUp</string>
+</resources>

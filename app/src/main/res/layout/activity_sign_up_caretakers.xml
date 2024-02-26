@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".authentication.caretakers.SignUpCaretakersActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageButton
+            style="@style/imageColor"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:layout_margin="@dimen/_10sdp"
+            android:scaleType="centerCrop"
+            android:id="@+id/caretaker_signup_back"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/family"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/caretaker_signup_back" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView">
+
+            <com.hbb20.CountryCodePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ccp_contentColor="@color/myBlue"
+                android:layout_gravity="center"
+                app:ccp_textSize="@dimen/_15ssp"
+                android:id="@+id/caretaker_signup_countycode"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/caretaker_signup_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.Theme.ElderlyCareApplication"
+                android:hint="@string/phone"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:boxStrokeColor="@color/myBlue"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:endIconMode="clear_text"
+                android:elevation="@dimen/_10sdp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/caretaker_signup_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.Theme.ElderlyCareApplication"
+                android:hint="@string/username"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:boxStrokeColor="@color/myBlue"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:endIconMode="clear_text"
+                android:elevation="@dimen/_10sdp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/caretaker_signup_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.Theme.ElderlyCareApplication"
+                android:hint="@string/password"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:boxStrokeColor="@color/myBlue"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:endIconMode="password_toggle"
+                android:elevation="@dimen/_10sdp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/caretaker_signup_confirmPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.Theme.ElderlyCareApplication"
+                android:hint="@string/confirm_password"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:boxStrokeColor="@color/myBlue"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:endIconMode="password_toggle"
+                android:elevation="@dimen/_10sdp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:imeOptions="actionDone"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/caretaker_signup_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    app:cornerRadius="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:backgroundTint="@color/myBlue"
+                    android:text="@string/next"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:elevation="@dimen/_20sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp"/>
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:indeterminateTint="@color/myBlue"
+                    android:layout_gravity="center"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:id="@+id/caretaker_signup_progress"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
