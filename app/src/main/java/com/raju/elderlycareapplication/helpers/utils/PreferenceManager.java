@@ -3,8 +3,6 @@ package com.raju.elderlycareapplication.helpers.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.raju.elderlycareapplication.helpers.user_models.Constants;
-
 public class PreferenceManager {
     private final SharedPreferences sharedPreferences;
     public PreferenceManager(Context context){

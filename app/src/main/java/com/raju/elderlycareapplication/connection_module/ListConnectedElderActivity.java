@@ -8,17 +8,20 @@ import android.view.View;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.raju.elderlycareapplication.authentication.caretakers.ElderDetailsActivity;
 import com.raju.elderlycareapplication.helpers.adapters.ListElderAdapter;
 import com.raju.elderlycareapplication.helpers.user_models.ConnectedElderModel;
-import com.raju.elderlycareapplication.helpers.user_models.Constants;
+import com.raju.elderlycareapplication.helpers.utils.Constants;
 import com.raju.elderlycareapplication.helpers.utils.ElderListener;
 import com.raju.elderlycareapplication.helpers.utils.PreferenceManager;
 import com.raju.elderlycareapplication.databinding.ActivityListConnectedElderBinding;
+import com.raju.elderlycareapplication.reminder_scheduling.AddCheckupReminderActivity;
+import com.raju.elderlycareapplication.reminder_scheduling.AddNoOfMedActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListConnectedElderActivity extends AppCompatActivity {
+public class ListConnectedElderActivity extends AppCompatActivity implements ElderListener {
 
     private PreferenceManager preferenceManager;
     private ActivityListConnectedElderBinding listConnectedElderBinding;
@@ -59,8 +62,8 @@ public class ListConnectedElderActivity extends AppCompatActivity {
                             );
                             elderModelList.add(connectedElderModel);
                         }
-                        if (elderModelList.size() > 0) {
-                            ListElderAdapter adapter = new ListElderAdapter(elderModelList);
+                        if (!elderModelList.isEmpty()) {
+                            ListElderAdapter adapter = new ListElderAdapter(elderModelList,this);
                             listConnectedElderBinding.connectedEldersList.setAdapter(adapter);
                             unloading();
                         } else {
@@ -89,9 +92,20 @@ public class ListConnectedElderActivity extends AppCompatActivity {
         listConnectedElderBinding.errorMsg.setVisibility(View.VISIBLE);
     }
 
-//    @Override
-//    public void onElderClicked(ConnectedElderModel elderModel) {
-//        Intent intent = new Intent(ListConnectedElderActivity.this,AM)
-//        startActivity();
-//    }
+    @Override
+    public void onElderClicked(ConnectedElderModel elderModel,int value) {
+        Intent intent;
+        //0 -> For Add Med Activity | 1 -> Elder Details | 2-> For Check Activity
+        if(value==0){
+            intent = new Intent(ListConnectedElderActivity.this, AddNoOfMedActivity.class);
+        }
+        else if(value==1){
+            intent = new Intent(ListConnectedElderActivity.this, ElderDetailsActivity.class);
+        }
+        else{
+            intent = new Intent(ListConnectedElderActivity.this, AddCheckupReminderActivity.class);
+        }
+        intent.putExtra("connectedModel",elderModel);
+        startActivity(intent);
+    }
 }

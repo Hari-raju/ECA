@@ -6,4 +6,150 @@
     android:layout_height="match_parent"
     tools:context=".reminder_scheduling.AddMedReminderActivity">
 
+    <ImageButton
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/_10sdp"
+        android:scaleType="centerCrop"
+        style="@style/imageColor"
+        android:id="@+id/addMedBack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
+        android:text="@string/add_medication"
+        android:textAllCaps="true"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/med"
+        app:layout_constraintStart_toStartOf="@+id/med"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_150sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addMedBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/_40sdp"
+        app:riv_corner_radius="@dimen/_20sdp"
+        android:elevation="@dimen/_20sdp"
+        android:src="@drawable/medicine"
+        android:id="@+id/med"
+        android:scaleType="centerCrop"/>
+
+    <ImageButton
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:src="@drawable/baseline_add_circle_24"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="@id/med"
+        app:layout_constraintEnd_toEndOf="@id/med"
+        app:layout_constraintTop_toTopOf="@id/med"
+        app:layout_constraintBottom_toBottomOf="@id/med"
+        android:elevation="@dimen/_30sdp"
+        android:id="@+id/addMedPic"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/med"
+        android:orientation="vertical"
+        android:padding="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/dateButton"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/myBlue"
+            app:cornerRadius="@dimen/_8sdp"
+            android:text="@string/medication_time"
+            android:textStyle="bold"
+            android:textSize="@dimen/_13ssp"
+            android:id="@+id/addMedTime"
+            android:layout_gravity="center"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/_20sdp"
+            android:hint="@string/medicine_name"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/myBlue"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:endIconMode="clear_text"
+            android:id="@+id/addMedName"
+            style="@style/Base.Theme.ElderlyCareApplication">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:imeOptions="actionNext"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="@string/medicine_purpose"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/myBlue"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:endIconMode="clear_text"
+            android:id="@+id/addMedPurpose"
+            style="@style/Base.Theme.ElderlyCareApplication">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:imeOptions="actionDone"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                app:cornerRadius="@dimen/_8sdp"
+                android:backgroundTint="@color/myBlue"
+                android:textSize="@dimen/_13ssp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textStyle="bold"
+                android:text="@string/next"
+                android:textColor="@color/white"
+                android:id="@+id/addMedNext"/>
+
+            <ProgressBar
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:indeterminateTint="@color/myBlue"
+                android:indeterminate="true"
+                android:id="@+id/addMedProgress"/>
+
+        </FrameLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import com.raju.elderlycareapplication.R;
 import com.raju.elderlycareapplication.authentication.home.OtpActivity;
 import com.raju.elderlycareapplication.databinding.ActivityElderDescriptionBinding;
 import com.raju.elderlycareapplication.helpers.user_models.Elder_Model;
+import com.raju.elderlycareapplication.helpers.utils.Constants;
 
 import java.util.Calendar;
 
@@ -69,7 +70,7 @@ public class ElderDescriptionActivity extends AppCompatActivity {
                     intent.putExtra("elderData",elder_model);
 
                     //Here we putting this so that next activity can know from which activity its coming!
-                    intent.putExtra("whatToDo","elder_signUp_otp");
+                    intent.putExtra(Constants.KEY_WHAT_TO_DO,"elder_signUp_otp");
                     startActivity(intent);
                     overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 }

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".reminder_scheduling.AddCheckupReminderActivity">
+
+    <ImageButton
+        style="@style/imageColor"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:scaleType="centerCrop"
+        android:layout_margin="@dimen/_10sdp"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/addCheckBack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:padding="@dimen/_5sdp"
+        android:text="@string/check_up_scheduler"
+        android:textAllCaps="true"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.307"
+        app:layout_constraintStart_toEndOf="@+id/addCheckBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/check"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addCheckBack"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Enter start and end time"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/_10sdp"
+        android:padding="@dimen/_10sdp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:id="@+id/about"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@id/imageView"/>
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/about"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="@dimen/_135sdp"
+                android:layout_height="wrap_content"
+                app:cornerRadius="@dimen/_8sdp"
+                style="@style/dateButton"
+                app:strokeWidth="2dp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                app:strokeColor="@color/myBlue"
+                android:text="@string/start_time"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold"
+                android:id="@+id/addCheckStartTime"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="@dimen/_135sdp"
+                android:layout_height="wrap_content"
+                app:cornerRadius="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                style="@style/dateButton"
+                app:strokeWidth="2dp"
+                app:strokeColor="@color/myBlue"
+                android:text="@string/end_time"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold"
+                android:id="@+id/addCheckEnd"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                app:cornerRadius="@dimen/_8sdp"
+                android:backgroundTint="@color/myBlue"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="@string/set_up"
+                android:elevation="@dimen/_20sdp"
+                android:textSize="@dimen/_13ssp"
+                android:id="@+id/addCheckup"/>
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/myBlue"
+                android:id="@+id/addCheckUpProgress"
+                android:visibility="gone"/>
+        </FrameLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

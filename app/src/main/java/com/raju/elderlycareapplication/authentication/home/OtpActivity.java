@@ -24,7 +24,7 @@ import com.raju.elderlycareapplication.authentication.caretakers.CaretakerHomeAc
 import com.raju.elderlycareapplication.databinding.ActivityOtpBinding;
 import com.raju.elderlycareapplication.helpers.user_models.CaretakerModel;
 import com.raju.elderlycareapplication.helpers.user_models.ConnectModel;
-import com.raju.elderlycareapplication.helpers.user_models.Constants;
+import com.raju.elderlycareapplication.helpers.utils.Constants;
 import com.raju.elderlycareapplication.helpers.user_models.Elder_Model;
 import com.raju.elderlycareapplication.helpers.utils.PreferenceManager;
 
@@ -38,7 +38,7 @@ public class OtpActivity extends AppCompatActivity {
     private CaretakerModel caretakerModel;
     private FirebaseAuth mAuth;
     private String verificationId;
-    private String whatToDo;
+    private String fromActivity;
     private ConnectModel connectModel;
     private String phone;
     private PreferenceManager preferenceManager;
@@ -54,17 +54,17 @@ public class OtpActivity extends AppCompatActivity {
         otpBinding.resendOtp.setVisibility(View.GONE);
         listeners();
         //Receive the extra to know from which activity it is coming from
-        whatToDo = getIntent().getStringExtra("whatToDo");
+        fromActivity = getIntent().getStringExtra(Constants.KEY_WHAT_TO_DO);
         preferenceManager = new PreferenceManager(OtpActivity.this);
-        if (whatToDo != null) {
+        if (fromActivity != null) {
             //Then we are checking whether its coming from elder signup and getting the elder model object or caretakers signup
-            if (whatToDo.equals("elder_signUp_otp")) {
+            if (fromActivity.equals("elder_signUp_otp")) {
                 elder_model = (Elder_Model) getIntent().getSerializableExtra("elderData");
                 otpBinding.sentOtpNum.setText("Please enter the otp sent to your number\n" + elder_model.getElderPhone());
                 phone = elder_model.getElderPhone();
                 //Calling otp func
-                sendOtpToUser(elder_model.getElderPhone(), false);
-            } else if (whatToDo.equals("caretaker_signUp_otp")) {
+                sendOtpToUser(phone, false);
+            } else if (fromActivity.equals("caretaker_signUp_otp")) {
                 caretakerModel = (CaretakerModel) getIntent().getSerializableExtra("caretakerData");
                 otpBinding.sentOtpNum.setText("Please enter the otp sent to your number\n" + caretakerModel.getCaretakerPhone());
                 phone = caretakerModel.getCaretakerPhone();
@@ -90,6 +90,7 @@ public class OtpActivity extends AppCompatActivity {
         });
 
         otpBinding.resendOtp.setOnClickListener(v -> {
+            otpBinding.otpNum.setText(null);
             sendOtpToUser(phone, true);
         });
     }
@@ -144,7 +145,6 @@ public class OtpActivity extends AppCompatActivity {
             super.onCodeSent(s, forceResendingToken);
             verificationId = s;
             token = forceResendingToken;
-            Log.d("OtpActivity", "onverificatiionSent");
             resendDisable();
             startCountDown();
             otpBinding.resendOtp.setVisibility(View.VISIBLE);
@@ -179,14 +179,14 @@ public class OtpActivity extends AppCompatActivity {
                             //Then we passing the data object and from activity to next activity
                             Intent intent = new Intent(OtpActivity.this, ProfileActivity.class);
                             //If what to do is not null
-                            if (whatToDo != null) {
+                            if (fromActivity != null) {
                                 //if what to do is equals elder_signup_otp means it is coming from elder signup activity
                                 // else it is coming from caretaker signup activity
-                                if (whatToDo.equals("elder_signUp_otp")) {
+                                if (fromActivity.equals("elder_signUp_otp")) {
                                     intent.putExtra("whatToDo", "elderAcc");
                                     intent.putExtra("elderData", elder_model);
                                     startActivity(intent);
-                                } else if (whatToDo.equals("caretaker_signUp_otp")) {
+                                } else if (fromActivity.equals("caretaker_signUp_otp")) {
                                     intent.putExtra("whatToDo", "caretakerAcc");
                                     intent.putExtra("caretakerData", caretakerModel);
                                     startActivity(intent);
@@ -247,14 +247,14 @@ public class OtpActivity extends AppCompatActivity {
         database.collection(Constants.KEY_ELDER_COLLECTION)
                 .whereEqualTo(Constants.KEY_ELDER_PHONE, connectModel.getElderPhone())
                 .get().addOnCompleteListener(task -> {
-                    if (task.getResult()!=null && task.isSuccessful() && task.getResult().getDocuments().size()>0){
+                    if (task.getResult()!=null && task.isSuccessful() && !task.getResult().getDocuments().isEmpty()){
                         DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                         connectModel.setElderName(documentSnapshot.getString(Constants.KEY_ELDER_NAME));
                         connectModel.setElderProfile(documentSnapshot.getString(Constants.KEY_ELDER_PROFILE));
                         database.collection(Constants.KEY_CARETAKER_COLLECTION).whereEqualTo(Constants.KEY_CARETAKER_PHONE,connectModel.getCaretakerPhone())
                                 .get()
                                 .addOnCompleteListener(result->{
-                                   if(result.getResult()!=null && result.isSuccessful() && result.getResult().getDocuments().size()>0){
+                                   if(result.getResult()!=null && result.isSuccessful() && !result.getResult().getDocuments().isEmpty()){
                                        DocumentSnapshot snapshot = result.getResult().getDocuments().get(0);
                                        connectModel.setCaretakerName(snapshot.getString(Constants.KEY_CARETAKER_NAME));
                                        connectModel.setCaretakerProfile(snapshot.getString(Constants.KEY_CARETAKER_PROFILE));

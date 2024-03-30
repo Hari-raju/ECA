@@ -58,7 +58,7 @@
             android:indeterminate="true"
             android:indeterminateTint="@color/white"
             android:layout_gravity="center"
-            android:id="@+id/listElder_progress"
+            android:id="@+id/listElderProgress"
             />
 
         <TextView

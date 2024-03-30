@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
+    android:layout_marginTop="@dimen/_10sdp"
     android:foreground="?attr/selectableItemBackground"
     android:clickable="true"
+    android:id="@+id/elderCard"
     app:cardElevation="@dimen/_20sdp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -26,7 +28,7 @@
             app:riv_oval="true"
             android:background="@drawable/round_bg"
             android:scaleType="centerCrop"
-            android:id="@+id/connected_elder_profile"/>
+            android:id="@+id/connectedElderProfile"/>
 
         <TextView
             android:id="@+id/connectedElderName"
@@ -42,8 +44,8 @@
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/connected_elder_profile"
-            app:layout_constraintTop_toTopOf="@id/connected_elder_profile" />
+            app:layout_constraintStart_toEndOf="@id/connectedElderProfile"
+            app:layout_constraintTop_toTopOf="@id/connectedElderProfile" />
 
         <TextView
             android:id="@+id/connectedElderPhone"
@@ -59,7 +61,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/connectedElderName"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/connected_elder_profile"
+            app:layout_constraintStart_toEndOf="@id/connectedElderProfile"
             app:layout_constraintTop_toBottomOf="@id/connectedElderName"
             app:layout_constraintBottom_toTopOf="@id/button_container"/>
 
@@ -72,7 +74,7 @@
             android:weightSum="4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/connected_elder_profile"
+            app:layout_constraintTop_toBottomOf="@id/connectedElderProfile"
             android:layout_marginTop="@dimen/_5sdp">
 
             <com.google.android.material.button.MaterialButton

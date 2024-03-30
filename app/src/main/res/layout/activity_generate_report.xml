@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".reminder_scheduling.GenerateReportActivity">
+
+    <ImageButton
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+        android:id="@+id/report_generate_back"/>
+
+    <ImageButton
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/download_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/report_download"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/myBlue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/generate_report_progressBar"/>
+
+    <ScrollView
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/report_generate_back"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_8sdp">
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medical_report"
+                android:textStyle="bold"
+                android:textSize="@dimen/_20ssp"/>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:src="@drawable/user"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/report_profile"
+                android:background="@drawable/round_bg"
+                android:scaleType="centerCrop"
+                app:riv_oval="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Elder Name"
+                android:textColor="@color/myBlue"
+                android:textSize="@dimen/_18ssp"
+                android:layout_margin="@dimen/_10sdp"
+                android:id="@+id/report_eldername"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="XX/XX/XXXX"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_14ssp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:id="@+id/report_elderdob"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/health_description"
+                android:layout_margin="@dimen/_10sdp"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_12ssp"
+                android:text=""
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textAlignment="textStart"
+                android:id="@+id/report_description"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medicines"
+                android:layout_margin="@dimen/_10sdp"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_12ssp"
+                android:text=""
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textAlignment="textStart"
+                android:id="@+id/report_medicines"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/grey"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/report_sym_input"
+                    app:hintTextColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:elevation="@dimen/_20sdp"
+                    android:hint="@string/enter_your_elder_symptoms"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxStrokeColor="@color/myBlue"
+                    app:boxStrokeWidthFocused="@dimen/_2sdp"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="start"
+                        android:textColor="@color/black"
+                        android:inputType="textMultiLine"
+                        android:minLines="2" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/report_sym_generate"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_85sdp"
+                    android:backgroundTint="@color/myBlue"
+                    android:clickable="true"
+                    android:elevation="@dimen/_20sdp"
+                    android:focusable="true"
+                    android:text="Generate"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    app:cornerRadius="@dimen/_8sdp" />
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_marginTop="@dimen/_95sdp"
+                    android:id="@+id/report_sym_progress"
+                    android:visibility="gone"/>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/report_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Current Symptoms :"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_12ssp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textAlignment="textStart"
+                        android:id="@+id/report_sym"/>
+
+
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

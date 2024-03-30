@@ -1,5 +1,7 @@
 package com.raju.elderlycareapplication.authentication.home;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,7 +12,7 @@ import android.os.Looper;
 import com.raju.elderlycareapplication.R;
 import com.raju.elderlycareapplication.authentication.caretakers.CaretakerHomeActivity;
 import com.raju.elderlycareapplication.authentication.elder.ElderHomeActivity;
-import com.raju.elderlycareapplication.helpers.user_models.Constants;
+import com.raju.elderlycareapplication.helpers.utils.Constants;
 import com.raju.elderlycareapplication.helpers.utils.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity {

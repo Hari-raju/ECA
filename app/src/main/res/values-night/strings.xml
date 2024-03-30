@@ -27,7 +27,7 @@
     <string name="connect_elder">Connect Elder\'s</string>
     <string name="view_elder">View Elder\'s</string>
     <string name="account">Account</string>
-    <string name="send_report">Send Report</string>
+    <string name="send_report">Create Report</string>
     <string name="resend_otp_in_60_seconds">Resend OTP in 60 seconds</string>
     <string name="connect_to_elder">Connect To Elder\'s</string>
     <string name="elder_s_number">Elder\'s Number</string>
@@ -36,4 +36,23 @@
     <string name="no_elder_s_found">No Elder\'s Found</string>
     <string name="add_medication">Add Medication</string>
     <string name="add_checkup">Add CheckUp</string>
+    <string name="medication_scheduler">Medication Scheduler</string>
+    <string name="enter_n_o_of_medications_nyou_want_to_schedule_for_e_g_if_you_want_to_schedule_morning_night_enter_2">Enter N.O of Medications you want to schedule\n[For E.g : If you want to schedule Morning,Night enter 2]</string>
+    <string name="no_of_medications">No of Medications</string>
+    <string name="medicine_name">Medicine Name\'s</string>
+    <string name="medicine_purpose">Medicine Purpose\'s</string>
+    <string name="check_up_scheduler">Check Up Scheduler</string>
+    <string name="medication_time">Medication Time</string>
+    <string name="start_time">Start Time</string>
+    <string name="interval_time">Interval Time</string>
+    <string name="end_time">End time</string>
+    <string name="set_up">SET UP</string>
+    <string name="medical_report">Medical Report</string>
+    <string name="health_description">Health Description :</string>
+    <string name="medicines">Medicines :</string>
+    <string name="enter_your_elder_symptoms">Enter your elder symptoms!</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="just_checking_in_to_see_nhow_you_re_doing_have_a_nice_day">Just checking in to see\nHow you\'re doing Have a nice day!</string>
+    <string name="alright">Alright!</string>
+    <string name="fall_was_detected_from_your_device_n_nare_you_alright">Fall was Detected from your Device\n\nAre you alright?</string>
 </resources>

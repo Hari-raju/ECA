@@ -10,7 +10,7 @@ import com.raju.elderlycareapplication.R;
 import com.raju.elderlycareapplication.authentication.home.OtpActivity;
 import com.raju.elderlycareapplication.databinding.ActivitySignUpCaretakersBinding;
 import com.raju.elderlycareapplication.helpers.user_models.CaretakerModel;
-import com.raju.elderlycareapplication.helpers.user_models.Constants;
+import com.raju.elderlycareapplication.helpers.utils.Constants;
 import com.raju.elderlycareapplication.helpers.utils.Validation;
 
 import java.util.Objects;
@@ -74,7 +74,7 @@ public class SignUpCaretakersActivity extends AppCompatActivity {
                                                     );
                                                     Intent intent = new Intent(SignUpCaretakersActivity.this, OtpActivity.class);
                                                     intent.putExtra("caretakerData", caretakerModel);
-                                                    intent.putExtra("whatToDo", "caretaker_signUp_otp");
+                                                    intent.putExtra(Constants.KEY_WHAT_TO_DO, "caretaker_signUp_otp");
                                                     unloading();
                                                     startActivity(intent);
                                                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

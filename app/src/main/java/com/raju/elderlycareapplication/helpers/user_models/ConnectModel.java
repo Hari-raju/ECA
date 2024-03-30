@@ -12,6 +12,35 @@ public class ConnectModel implements Serializable {
     private String caretakerName;
     private String caretakerProfile;
 
+    public ConnectModel(String elderPhone, String caretakerPhone) {
+        this.elderPhone = elderPhone;
+        this.caretakerPhone = caretakerPhone;
+    }
+
+    public String getElderPhone() {
+        return elderPhone;
+    }
+
+    public void setElderPhone(String elderPhone) {
+        this.elderPhone = elderPhone;
+    }
+
+    public String getCaretakerPhone() {
+        return caretakerPhone;
+    }
+
+    public void setCaretakerPhone(String caretakerPhone) {
+        this.caretakerPhone = caretakerPhone;
+    }
+
+    public String getElderProfile() {
+        return elderProfile;
+    }
+
+    public void setElderProfile(String elderProfile) {
+        this.elderProfile = elderProfile;
+    }
+
     public String getElderName() {
         return elderName;
     }
@@ -34,34 +63,5 @@ public class ConnectModel implements Serializable {
 
     public void setCaretakerProfile(String caretakerProfile) {
         this.caretakerProfile = caretakerProfile;
-    }
-
-    public ConnectModel(String elderPhone, String caretakerPhone) {
-        this.elderPhone = elderPhone;
-        this.caretakerPhone = caretakerPhone;
-    }
-
-    public void setElderProfile(String elderProfile) {
-        this.elderProfile = elderProfile;
-    }
-
-    public String getElderProfile() {
-        return elderProfile;
-    }
-
-    public String getElderPhone() {
-        return elderPhone;
-    }
-
-    public void setElderPhone(String elderPhone) {
-        this.elderPhone = elderPhone;
-    }
-
-    public String getCaretakerPhone() {
-        return caretakerPhone;
-    }
-
-    public void setCaretakerPhone(String caretakerPhone) {
-        this.caretakerPhone = caretakerPhone;
     }
 }

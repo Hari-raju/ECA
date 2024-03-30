@@ -11,12 +11,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.raju.elderlycareapplication.R;
 import com.raju.elderlycareapplication.authentication.caretakers.CaretakerHomeActivity;
 import com.raju.elderlycareapplication.authentication.elder.ElderHomeActivity;
 import com.raju.elderlycareapplication.databinding.ActivityProfileBinding;
 import com.raju.elderlycareapplication.helpers.user_models.CaretakerModel;
-import com.raju.elderlycareapplication.helpers.user_models.Constants;
+import com.raju.elderlycareapplication.helpers.utils.Constants;
 import com.raju.elderlycareapplication.helpers.user_models.Elder_Model;
 import com.raju.elderlycareapplication.helpers.utils.EncoderDecoder;
 import com.raju.elderlycareapplication.helpers.utils.PreferenceManager;
@@ -38,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
 
         //We are getting from this activity is called
-        whatToDo = getIntent().getStringExtra("whatToDo");
+        whatToDo = getIntent().getStringExtra(Constants.KEY_WHAT_TO_DO);
         //If its from elder then get elder data object
         if (whatToDo != null) {
             if (whatToDo.equals("elderAcc")) {
@@ -69,11 +71,16 @@ public class ProfileActivity extends AppCompatActivity {
             new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
                 @Override
-                public void onActivityResult(Uri o) {
-                    if (o != null) {
-                        profileBinding.usersProfile.setImageURI(o);
+                public void onActivityResult(Uri uri) {
+                    if (uri != null) {
+                        Glide.with(ProfileActivity.this)
+                                .load(uri)
+                                .error(R.drawable.error)
+                                .placeholder(R.drawable.place_holder)
+                                .into(profileBinding.usersProfile);
+
                         profileBinding.done.setVisibility(View.VISIBLE);
-                        profileUrl = EncoderDecoder.encodeImage(o, ProfileActivity.this);
+                        profileUrl = EncoderDecoder.encodeImage(uri, ProfileActivity.this);
 
                         //Same Checking to identify where its coming from whether elder or caretaker activity
                         if (whatToDo != null) {
@@ -132,10 +139,10 @@ public class ProfileActivity extends AppCompatActivity {
                         .add(caretakerModel)
                         .addOnSuccessListener(
                                 documentReference -> {
-                                    preferenceManager.putBoolean(Constants.KEY_IS_CARETAKER_SIGNED_IN,true);
-                                    preferenceManager.putString(Constants.KEY_CARETAKER_ID,documentReference.getId());
-                                    preferenceManager.putString(Constants.KEY_CARETAKER_NAME,caretakerModel.getCaretakerName());
-                                    preferenceManager.putString(Constants.KEY_CARETAKER_PHONE,caretakerModel.getCaretakerPhone());
+                                    preferenceManager.putBoolean(Constants.KEY_IS_CARETAKER_SIGNED_IN, true);
+                                    preferenceManager.putString(Constants.KEY_CARETAKER_ID, documentReference.getId());
+                                    preferenceManager.putString(Constants.KEY_CARETAKER_NAME, caretakerModel.getCaretakerName());
+                                    preferenceManager.putString(Constants.KEY_CARETAKER_PHONE, caretakerModel.getCaretakerPhone());
                                     preferenceManager.putString(Constants.KEY_CARETAKER_PROFILE, caretakerModel.getCaretakerProfile());
                                     Intent intent = new Intent(ProfileActivity.this, CaretakerHomeActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

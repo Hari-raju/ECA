@@ -12,7 +12,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.raju.elderlycareapplication.R;
 import com.raju.elderlycareapplication.databinding.ActivitySignInEldersBinding;
-import com.raju.elderlycareapplication.helpers.user_models.Constants;
+import com.raju.elderlycareapplication.helpers.utils.Constants;
 import com.raju.elderlycareapplication.helpers.utils.PreferenceManager;
 import com.raju.elderlycareapplication.helpers.utils.Validation;
 

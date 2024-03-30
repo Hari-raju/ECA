@@ -1,6 +1,9 @@
 package com.raju.elderlycareapplication.helpers.user_models;
 
-public class ConnectedElderModel {
+
+import java.io.Serializable;
+
+public class ConnectedElderModel implements Serializable {
     private String elderPhone;
     private String elderName;
     private String elderProfile;

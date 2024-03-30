@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="@dimen/_10sdp"
+    android:layout_height="match_parent"
+    tools:context=".reminder_display.ElderCheckReminderActivity">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/help"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check up Reminder"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textSize="@dimen/_24ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_25sdp"/>
+
+    <TextView
+        android:id="@+id/greetMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/just_checking_in_to_see_nhow_you_re_doing_have_a_nice_day"
+        android:textAlignment="center"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView4"
+        android:textStyle="bold"
+        android:textSize="@dimen/_22ssp"
+        android:text="How are you?"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:id="@+id/checkMessage"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        app:layout_constraintTop_toBottomOf="@id/checkMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cornerRadius="@dimen/_8sdp"
+        android:text="@string/alright"
+        android:textAllCaps="true"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:elevation="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:backgroundTint="@color/green"
+        android:id="@+id/safe"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
