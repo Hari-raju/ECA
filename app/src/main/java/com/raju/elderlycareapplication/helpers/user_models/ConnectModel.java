@@ -10,7 +10,7 @@ public class ConnectModel implements Serializable {
 
     private String elderName;
     private String caretakerName;
-    private String caretakerProfile;
+
 
     public ConnectModel(String elderPhone, String caretakerPhone) {
         this.elderPhone = elderPhone;
@@ -57,11 +57,4 @@ public class ConnectModel implements Serializable {
         this.caretakerName = caretakerName;
     }
 
-    public String getCaretakerProfile() {
-        return caretakerProfile;
-    }
-
-    public void setCaretakerProfile(String caretakerProfile) {
-        this.caretakerProfile = caretakerProfile;
-    }
 }

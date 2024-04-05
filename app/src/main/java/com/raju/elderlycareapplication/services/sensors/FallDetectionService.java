@@ -391,12 +391,11 @@ public class FallDetectionService extends Service implements SensorEventListener
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationUtils.createNotificationChannel(this);
         Notification notification = new NotificationCompat.Builder(this, "ECA")
-                .setSmallIcon(R.drawable.app_logo)
                 .setContentTitle("Fall Detected")
                 .setContentText("Are you alright?")
                 .setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.app_logo)
                 .setAutoCancel(true)
-                .setColorized(false)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build();
 
@@ -414,7 +413,7 @@ public class FallDetectionService extends Service implements SensorEventListener
 
         Log.d("Testing","countdo");
         startMediaPlayer();
-        countDownTimer = new CountDownTimer(60000,1000) {
+        countDownTimer = new CountDownTimer(30000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 Log.d("Fall Detection Alert",String.valueOf(millisUntilFinished/1000));

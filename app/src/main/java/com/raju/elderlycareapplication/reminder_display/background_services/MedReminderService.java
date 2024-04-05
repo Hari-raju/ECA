@@ -47,7 +47,6 @@ public class MedReminderService extends Service {
         //Starting Foreground service
         int serviceId = 1000;
         startForeground(serviceId, getNotification());
-
         //Setting Alarms
         setMedAlarm(this);
         setCheckupAlarm(this);
@@ -148,7 +147,7 @@ public class MedReminderService extends Service {
             calendar.set(Calendar.SECOND, 0);
             calendar.set(Calendar.MILLISECOND, 0);
             calendar.add(Calendar.DAY_OF_YEAR, 1);
-            //It will execute after 2 mins bcz if we dont do this time will class
+            //It will execute after 2 mins bcz if we dont do this time will clash
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 // Set the alarm using AlarmManager
                 AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(calendar.getTimeInMillis(), pendingIntent);
@@ -210,7 +209,8 @@ public class MedReminderService extends Service {
                     Log.d("ElderHome", "Inside If1");
                     Calendar alarmCalendar = Calendar.getInstance();
                     alarmCalendar.setTimeInMillis(currTimeinMillis);
-                    alarmCalendar.add(Calendar.MINUTE,60);
+                    alarmCalendar.add(Calendar.MINUTE,1);
+//                  alarmCalendar.add(Calendar.MINUTE, 50);
                     Log.d("ElderHome", String.valueOf(alarmCalendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(alarmCalendar.get(Calendar.MINUTE)));
                     alarmIntent.putExtra("alarmTime", String.format("%d:%d", alarmCalendar.get(Calendar.HOUR_OF_DAY), alarmCalendar.get(Calendar.MINUTE)));
                     //Setting Alarm
@@ -232,7 +232,8 @@ public class MedReminderService extends Service {
                     Log.d("ElderHome", "Inside If1 Inside setCheckup");
                     Calendar alarmCalendar = Calendar.getInstance();
                     alarmCalendar.setTimeInMillis(currTimeinMillis);
-                    alarmCalendar.add(Calendar.MINUTE, 60);
+                    alarmCalendar.add(Calendar.MINUTE, 1);
+//                  alarmCalendar.add(Calendar.MINUTE, 50);
                     Log.d("ElderHome", String.valueOf(alarmCalendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(alarmCalendar.get(Calendar.MINUTE)));
                     alarmIntent.putExtra("alarmTime", String.format("%d:%d", alarmCalendar.get(Calendar.HOUR_OF_DAY), alarmCalendar.get(Calendar.MINUTE)));
                     //Setting Alarm
@@ -296,7 +297,8 @@ public class MedReminderService extends Service {
                     Log.d("ElderHome", "Inside If");
                     Calendar alarmCalendar = Calendar.getInstance();
                     alarmCalendar.setTimeInMillis(currTimeinMillis);
-                    alarmCalendar.add(Calendar.MINUTE, 60);
+                    alarmCalendar.add(Calendar.MINUTE, 2);
+//                    alarmCalendar.add(Calendar.MINUTE, 50);
                     Log.d("ElderHome", String.valueOf(alarmCalendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(alarmCalendar.get(Calendar.MINUTE)));
                     Log.d("ElderHome", String.valueOf(alarmCalendar.get(Calendar.HOUR_OF_DAY)));
                     alarmIntent.putExtra("alarmTime", String.format("%d:%d", alarmCalendar.get(Calendar.HOUR_OF_DAY), alarmCalendar.get(Calendar.MINUTE)));
@@ -316,7 +318,8 @@ public class MedReminderService extends Service {
                     Log.d("ElderHome", "Inside If");
                     Calendar alarmCalendar = Calendar.getInstance();
                     alarmCalendar.setTimeInMillis(currTimeinMillis);
-                    alarmCalendar.add(Calendar.MINUTE, 60);
+                    alarmCalendar.add(Calendar.MINUTE, 2);
+//                    alarmCalendar.add(Calendar.MINUTE, 50);
                     Log.d("ElderHome", String.valueOf(alarmCalendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(alarmCalendar.get(Calendar.MINUTE)));
                     Log.d("ElderHome", String.valueOf(alarmCalendar.get(Calendar.HOUR_OF_DAY)));
                     alarmIntent.putExtra("alarmTime", String.format("%d:%d", alarmCalendar.get(Calendar.HOUR_OF_DAY), alarmCalendar.get(Calendar.MINUTE)));

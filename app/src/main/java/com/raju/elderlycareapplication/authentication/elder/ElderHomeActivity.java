@@ -60,7 +60,7 @@ public class ElderHomeActivity extends AppCompatActivity {
         setContentView(homeBinding.getRoot());
         preferenceManager = new PreferenceManager(this);
         database = FirebaseFirestore.getInstance();
-
+        homeBinding.elderProfile.setImageBitmap(EncoderDecoder.decodeImage(preferenceManager.getString(Constants.KEY_ELDER_PROFILE)));
         //Lets Check permission
         checkPermissions();
         //Listeners
@@ -137,6 +137,7 @@ public class ElderHomeActivity extends AppCompatActivity {
                     .document(preferenceManager.getString(Constants.KEY_ELDER_ID))
                     .update(value)
                     .addOnSuccessListener(task -> {
+                        stopServices();
                         Intent intent = new Intent(this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         Toast.makeText(this, "Signing out...", Toast.LENGTH_SHORT).show();
@@ -268,6 +269,13 @@ public class ElderHomeActivity extends AppCompatActivity {
             startService(new Intent(this, MedReminderService.class));
             startService(new Intent(this, FallDetectionService.class));
         }
+//       // Toast.makeText(this, preferenceManager.getString(Constants.KEY_CARETAKER_FCM_TOKEN), Toast.LENGTH_SHORT).show();
+//        if(preferenceManager.getString(Constants.KEY_CARETAKER_FCM_TOKEN)!=null){
+//
+//        }
+//        else{
+//            Toast.makeText(this, "Caretaker must be logged out!", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private void checkSensorPerm(){
@@ -292,4 +300,9 @@ public class ElderHomeActivity extends AppCompatActivity {
             Toast.makeText(this, "Please Allow Alarm", Toast.LENGTH_SHORT).show();
         }
     });
+
+    private void stopServices(){
+        stopService(new Intent(this, MedReminderService.class));
+        stopService(new Intent(this, FallDetectionService.class));
+    }
 }

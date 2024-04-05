@@ -45,6 +45,7 @@ public class FCMNotificationService extends FirebaseMessagingService {
 
         //Build Notification
         Notification notification = new NotificationCompat.Builder(this, "ECA")
+                .setSmallIcon(R.drawable.app_logo)
                 .setContentTitle(model.getElderName())
                 .setContentText(message.getData().get(Constants.KEY_ALERT_MESSAGE))
                 .setContentIntent(pendingIntent)

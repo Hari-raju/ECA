@@ -98,7 +98,7 @@ public class MedReminderReceiver extends BroadcastReceiver {
     private void startCountDown(Context context){
         //60000 - > 1min 1000 ->interval
         Log.d("ElderHome","countDown");
-        countDownTimer = new CountDownTimer(60000,1000) {
+        countDownTimer = new CountDownTimer(30000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 Log.d("ElderHome",String.valueOf(millisUntilFinished/1000));

@@ -257,7 +257,6 @@ public class OtpActivity extends AppCompatActivity {
                                    if(result.getResult()!=null && result.isSuccessful() && !result.getResult().getDocuments().isEmpty()){
                                        DocumentSnapshot snapshot = result.getResult().getDocuments().get(0);
                                        connectModel.setCaretakerName(snapshot.getString(Constants.KEY_CARETAKER_NAME));
-                                       connectModel.setCaretakerProfile(snapshot.getString(Constants.KEY_CARETAKER_PROFILE));
                                        database.collection(Constants.KEY_CONNECT_COLLECTION)
                                                .add(connectModel)
                                                .addOnSuccessListener(success -> {
