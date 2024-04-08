@@ -7,6 +7,9 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <uses-feature android:name="android.hardware.sensor.accelerometer" />
     <uses-feature android:name="android.hardware.sensor.gyroscope" />
@@ -39,6 +42,9 @@
         android:theme="@style/Base.Theme.ElderlyCareApplication"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".authentication.caretakers.EmergencyElderActivity"
+            android:exported="false" />
         <activity
             android:name=".services.FallDetectedActivity"
             android:exported="false" />

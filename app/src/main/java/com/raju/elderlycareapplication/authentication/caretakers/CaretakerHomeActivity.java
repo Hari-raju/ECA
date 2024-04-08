@@ -43,13 +43,6 @@ public class CaretakerHomeActivity extends AppCompatActivity {
         setContentView(homeBinding.getRoot());
         database = FirebaseFirestore.getInstance();
         preferenceManager = new PreferenceManager(this);
-        if(getIntent().getStringExtra("alert")!=null && getIntent().getStringExtra("alert").equals("yes")){
-            if(FCMNotificationService.mediaPlayer!=null){
-                FCMNotificationService.mediaPlayer.stop();
-                FCMNotificationService.mediaPlayer.release();
-                FCMNotificationService.mediaPlayer=null;
-            }
-        }
         listeners();
         checkPermissionForNotification();
     }

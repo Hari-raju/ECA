@@ -77,4 +77,7 @@ dependencies {
 
     //pinview
     implementation 'io.github.chaosleung:pinview:1.4.4'
+
+    //Location
+    implementation "com.google.android.gms:play-services-location:21.2.0"
 }

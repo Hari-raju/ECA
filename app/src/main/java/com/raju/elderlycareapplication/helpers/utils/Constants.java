@@ -75,4 +75,6 @@ public class Constants {
         return remoteMsgHeaders;
     }
 
+    //Adddress
+    public static String KEY_LAST_ADDRESS = "lastAddress";
 }

@@ -203,7 +203,6 @@ public class ElderHomeActivity extends AppCompatActivity {
     private final ActivityResultLauncher<String> alarmLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
         if (isGranted) {
             Toast.makeText(this, "Allowed", Toast.LENGTH_SHORT).show();
-//            getConnectedCaretaker();
             checkSensorPerm();
         } else {
             Toast.makeText(this, "Not Allowed", Toast.LENGTH_SHORT).show();
@@ -262,40 +261,35 @@ public class ElderHomeActivity extends AppCompatActivity {
     }
 
     private void startServices() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(new Intent(this, MedReminderService.class));
-            startForegroundService(new Intent(this, FallDetectionService.class));
-        } else {
-            startService(new Intent(this, MedReminderService.class));
-            startService(new Intent(this, FallDetectionService.class));
+        if(preferenceManager.getString(Constants.KEY_CARETAKER_FCM_TOKEN)!=null){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(new Intent(this, MedReminderService.class));
+                startForegroundService(new Intent(this, FallDetectionService.class));
+            } else {
+                startService(new Intent(this, MedReminderService.class));
+                startService(new Intent(this, FallDetectionService.class));
+            }
         }
-//       // Toast.makeText(this, preferenceManager.getString(Constants.KEY_CARETAKER_FCM_TOKEN), Toast.LENGTH_SHORT).show();
-//        if(preferenceManager.getString(Constants.KEY_CARETAKER_FCM_TOKEN)!=null){
-//
-//        }
-//        else{
-//            Toast.makeText(this, "Caretaker must be logged out!", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     private void checkSensorPerm(){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.S){
             if(ContextCompat.checkSelfPermission(this,Manifest.permission.HIGH_SAMPLING_RATE_SENSORS)==PackageManager.PERMISSION_GRANTED){
-                getConnectedCaretaker();
+                checkLocationPerm();
             }
             else{
                 highLauncher.launch(Manifest.permission.HIGH_SAMPLING_RATE_SENSORS);
             }
         }
         else{
-            getConnectedCaretaker();
+            checkLocationPerm();
         }
     }
 
     private final ActivityResultLauncher<String> highLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
         if (isGranted) {
             Toast.makeText(this, "Allowed", Toast.LENGTH_SHORT).show();
-            getConnectedCaretaker();
+            checkLocationPerm();
         } else {
             Toast.makeText(this, "Please Allow Alarm", Toast.LENGTH_SHORT).show();
         }
@@ -305,4 +299,38 @@ public class ElderHomeActivity extends AppCompatActivity {
         stopService(new Intent(this, MedReminderService.class));
         stopService(new Intent(this, FallDetectionService.class));
     }
+
+    private void checkLocationPerm(){
+        Toast.makeText(this, "Getting Permission", Toast.LENGTH_SHORT).show();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            checkBackgroundPerm();
+        } else {
+            fineLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+    }
+
+    private void checkBackgroundPerm() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            getConnectedCaretaker();
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                background.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+            }
+        }
+    }
+
+    private final ActivityResultLauncher<String> fineLocation = registerForActivityResult(new ActivityResultContracts.RequestPermission(),
+            isGranted -> {
+                if(isGranted){
+                    checkBackgroundPerm();
+                }
+            }
+    );
+
+    private final ActivityResultLauncher<String> background = registerForActivityResult(new ActivityResultContracts.RequestPermission(),
+            isGranted->{
+                if(isGranted){
+                    getConnectedCaretaker();
+                }
+            });
 }

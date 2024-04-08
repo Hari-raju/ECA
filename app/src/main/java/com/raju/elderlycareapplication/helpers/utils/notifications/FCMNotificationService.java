@@ -17,9 +17,11 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.raju.elderlycareapplication.R;
 import com.raju.elderlycareapplication.authentication.caretakers.CaretakerHomeActivity;
+import com.raju.elderlycareapplication.authentication.caretakers.EmergencyElderActivity;
 import com.raju.elderlycareapplication.helpers.user_models.Elder_Model;
 import com.raju.elderlycareapplication.helpers.utils.Constants;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class FCMNotificationService extends FirebaseMessagingService {
@@ -37,9 +39,12 @@ public class FCMNotificationService extends FirebaseMessagingService {
         }
 
         int notificationId = new Random().nextInt();
-        Intent intent = new Intent(this, CaretakerHomeActivity.class);
+        Intent intent = new Intent(this, EmergencyElderActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.putExtra("alert","yes");
+        intent.putExtra(Constants.KEY_ELDER_PHONE,model.getElderPhone());
+        intent.putExtra(Constants.KEY_ELDER_NAME,model.getElderName());
+        intent.putExtra(Constants.KEY_ALERT_MESSAGE,message.getData().get(Constants.KEY_ALERT_MESSAGE));
+        intent.putExtra(Constants.KEY_LAST_ADDRESS,message.getData().get(Constants.KEY_LAST_ADDRESS));
         int id = 1008;
         PendingIntent pendingIntent = PendingIntent.getActivity(this,id,intent,PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 

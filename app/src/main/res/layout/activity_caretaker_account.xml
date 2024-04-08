@@ -49,6 +49,7 @@
         android:layout_height="@dimen/_100sdp"
         android:background="@drawable/round_bg"
         android:elevation="@dimen/_20sdp"
+        android:scaleType="centerCrop"
         android:src="@drawable/user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
