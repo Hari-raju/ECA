@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.raju.elderlycareapplication.R;
 import com.raju.elderlycareapplication.databinding.ActivityAddMedReminderBinding;
@@ -234,14 +235,38 @@ public class AddMedReminderActivity extends AppCompatActivity {
                 );
 
                 database.collection(Constants.KEY_ELDER_MED_REM_COLLECTION)
-                        .add(reminderModel)
-                        .addOnSuccessListener(success->{
-                            Toast.makeText(AddMedReminderActivity.this, "Added", Toast.LENGTH_SHORT).show();
-                            finish();
+                        .whereEqualTo(Constants.KEY_ELDER_PHONE,reminderModel.getElderPhone())
+                        .get()
+                        .addOnSuccessListener(query->{
+                            if(!query.isEmpty()){
+                                DocumentSnapshot document = query.getDocuments().get(0);
+                                database.collection(Constants.KEY_ELDER_MED_REM_COLLECTION)
+                                        .document(document.getId())
+                                        .set(reminderModel)
+                                        .addOnSuccessListener(success->{
+                                            Toast.makeText(AddMedReminderActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        })
+                                        .addOnFailureListener(fail->{
+                                            Log.e("DataBase",fail.getLocalizedMessage());
+                                            Toast.makeText(AddMedReminderActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        });
+                            }
+                            else{
+                                database.collection(Constants.KEY_ELDER_MED_REM_COLLECTION)
+                                        .add(reminderModel)
+                                        .addOnSuccessListener(success->{
+                                            Toast.makeText(AddMedReminderActivity.this, "Added", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        })
+                                        .addOnFailureListener(fail->{
+                                            Log.e("DataBase",fail.getLocalizedMessage());
+                                            Toast.makeText(AddMedReminderActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                        });
+                            }
                         })
-                        .addOnFailureListener(fail->{
-                            Log.e("DataBase",fail.getLocalizedMessage());
-                            Toast.makeText(AddMedReminderActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                        .addOnFailureListener(failure->{
+                            Toast.makeText(this, failure.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         });
             }
             else{

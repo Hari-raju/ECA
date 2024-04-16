@@ -90,7 +90,6 @@ public class FallDetectionService extends Service implements SensorEventListener
             Log.d("doPeriodicTask", "Delay Ended**********");
             Log.d("doPeriodicTask : Updating flag", "run: ");
             sentRecently = 'N';
-//            mPeriodicEventHandler.postDelayed(doPeriodicTask, PERIODIC_EVENT_TIMEOUT);
         }
     };
 
@@ -162,7 +161,6 @@ public class FallDetectionService extends Service implements SensorEventListener
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        Sensor mySensor = sensorEvent.sensor;
 
         switch (sensorEvent.sensor.getType()) {
             case Sensor.TYPE_ACCELEROMETER:
@@ -361,7 +359,6 @@ public class FallDetectionService extends Service implements SensorEventListener
                         degreeFloat = degreeFloat * -1;
                     if (degreeFloat2 < 0)
                         degreeFloat2 = degreeFloat2 * -1;
-//                    Log.d("Degrees:", "" + degreeFloat);
                     if (degreeFloat>10 && degreeFloat2>10 && degreeFloat > 70 || degreeFloat2 > 70) {
                         Log.d("Degree:", "1 :" + degreeFloat);
                         Log.d("Degree:", "2 :" + degreeFloat2);

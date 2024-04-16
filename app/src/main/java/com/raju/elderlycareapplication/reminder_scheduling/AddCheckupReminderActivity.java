@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.raju.elderlycareapplication.databinding.ActivityAddCheckupReminderBinding;
 import com.raju.elderlycareapplication.helpers.user_models.ConnectedElderModel;
@@ -107,13 +108,36 @@ public class AddCheckupReminderActivity extends AppCompatActivity {
                 map.put(Constants.KEY_CHECK_START_TIME,startTime);
                 map.put(Constants.KEY_CHECK_END_TIME,endTime);
                 database.collection(Constants.KEY_CHECK_COLLECTION)
-                        .add(map)
-                        .addOnSuccessListener(success->{
-                            Toast.makeText(this, "Setted", Toast.LENGTH_SHORT).show();
-                            finish();
+                        .whereEqualTo(Constants.KEY_ELDER_PHONE,map.get(Constants.KEY_ELDER_PHONE))
+                        .get()
+                        .addOnSuccessListener(query->{
+                            if(!query.isEmpty()){
+                                DocumentSnapshot document = query.getDocuments().get(0);
+                                database.collection(Constants.KEY_CHECK_COLLECTION)
+                                        .document(document.getId())
+                                        .set(map)
+                                        .addOnSuccessListener(success->{
+                                            Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        })
+                                        .addOnFailureListener(failed->{
+                                            Toast.makeText(this, failed.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                        });
+                            }
+                            else{
+                                database.collection(Constants.KEY_CHECK_COLLECTION)
+                                        .add(map)
+                                        .addOnSuccessListener(success->{
+                                            Toast.makeText(this, "Setted", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        })
+                                        .addOnFailureListener(failed->{
+                                            Toast.makeText(this, failed.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                        });
+                            }
                         })
-                        .addOnFailureListener(failed->{
-                            Toast.makeText(this, failed.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        .addOnFailureListener(failure->{
+                            Toast.makeText(this, failure.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         });
             }
         });

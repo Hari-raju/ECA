@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +17,6 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.raju.elderlycareapplication.connection_module.AddElderActivity;
@@ -26,7 +24,6 @@ import com.raju.elderlycareapplication.connection_module.ListConnectedElderActiv
 import com.raju.elderlycareapplication.databinding.ActivityCaretakerHomeBinding;
 import com.raju.elderlycareapplication.helpers.utils.Constants;
 import com.raju.elderlycareapplication.helpers.utils.PreferenceManager;
-import com.raju.elderlycareapplication.helpers.utils.notifications.FCMNotificationService;
 import com.raju.elderlycareapplication.helpers.utils.notifications.NotificationUtils;
 import com.raju.elderlycareapplication.reminder_scheduling.ElderListActivity;
 

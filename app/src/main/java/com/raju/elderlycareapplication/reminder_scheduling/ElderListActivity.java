@@ -62,6 +62,10 @@ public class ElderListActivity extends AppCompatActivity implements ElderReportL
                            showError("No Connected Elder's");
                        }
                    }
+                   else{
+                       unloading();
+                       showError("No Connected Elder's");
+                   }
                 })
                 .addOnFailureListener(fail->{
                     unloading();

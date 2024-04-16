@@ -6,6 +6,7 @@ import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Toast;
 
@@ -37,91 +38,91 @@ public class GenerateReportActivity extends AppCompatActivity {
     private ActivityGenerateReportBinding generateReportBinding;
     private FirebaseFirestore database;
     private Elder_Model model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         generateReportBinding = ActivityGenerateReportBinding.inflate(getLayoutInflater());
         setContentView(generateReportBinding.getRoot());
-        database=FirebaseFirestore.getInstance();
+        database = FirebaseFirestore.getInstance();
         model = (Elder_Model) getIntent().getSerializableExtra("elderDate");
         generateReportBinding.root.setVisibility(View.INVISIBLE);
         init();
         listeners();
     }
 
-    private void init(){
+    private void init() {
         //Setting Name and Profile
         generateReportBinding.reportEldername.setText(model.getElderName().toUpperCase());
         generateReportBinding.reportProfile.setImageBitmap(EncoderDecoder.decodeImage(model.getElderProfile()));
 
         database.collection(Constants.KEY_ELDER_COLLECTION)
-                .whereEqualTo(Constants.KEY_ELDER_PHONE,model.getElderPhone())
+                .whereEqualTo(Constants.KEY_ELDER_PHONE, model.getElderPhone())
                 .get()
                 .addOnCompleteListener(task -> {
-                   if(task.getResult()!=null && task.isSuccessful() & !task.getResult().getDocuments().isEmpty()) {
-                       DocumentSnapshot doc = task.getResult().getDocuments().get(0);
+                    if (task.getResult() != null && task.isSuccessful() & !task.getResult().getDocuments().isEmpty()) {
+                        DocumentSnapshot doc = task.getResult().getDocuments().get(0);
 
-                       //Setting DOB and Description
-                       generateReportBinding.reportElderdob.setText(doc.getString(Constants.KEY_ELDER_DOB));
-                       generateReportBinding.reportDescription.setText(doc.getString(Constants.KEY_ELDER_DESCRIPTION));
+                        //Setting DOB and Description
+                        generateReportBinding.reportElderdob.setText(doc.getString(Constants.KEY_ELDER_DOB));
+                        generateReportBinding.reportDescription.setText(doc.getString(Constants.KEY_ELDER_DESCRIPTION));
 
-                       //Gonna Medicines
-                       database.collection(Constants.KEY_ELDER_MED_REM_COLLECTION)
-                               .whereEqualTo(Constants.KEY_ELDER_PHONE,model.getElderPhone())
-                               .get().addOnCompleteListener(task2->{
-                                   if(task2.getResult()!=null && task2.isSuccessful() && !task2.getResult().getDocuments().isEmpty()){
+                        //Gonna Medicines
+                        database.collection(Constants.KEY_ELDER_MED_REM_COLLECTION)
+                                .whereEqualTo(Constants.KEY_ELDER_PHONE, model.getElderPhone())
+                                .get().addOnCompleteListener(task2 -> {
+                                    if (task2.getResult() != null && task2.isSuccessful() && !task2.getResult().getDocuments().isEmpty()) {
 
-                                       //Getting that reminder model object
-                                       DocumentSnapshot documentSnapshot = task2.getResult().getDocuments().get(0);
-                                       ReminderModel reminder = documentSnapshot.toObject(ReminderModel.class);
+                                        //Getting that reminder model object
+                                        DocumentSnapshot documentSnapshot = task2.getResult().getDocuments().get(0);
+                                        ReminderModel reminder = documentSnapshot.toObject(ReminderModel.class);
 
-                                       //Now retrieving particular medicine list
-                                       List<MedReminderModel> medReminderModelList = reminder.getListModel();
+                                        //Now retrieving particular medicine list
+                                        List<MedReminderModel> medReminderModelList = reminder.getListModel();
 
-                                       //Now only we gonna extract med name
-                                       StringBuilder medicines = new StringBuilder();
+                                        //Now only we gonna extract med name
+                                        StringBuilder medicines = new StringBuilder();
 
-                                       for (int j = 0; j < medReminderModelList.size(); j++) {
-                                           MedReminderModel i = medReminderModelList.get(j);
-                                           medicines.append(i.getEldersMedName());
-                                           if (j < medReminderModelList.size() - 1) {
-                                               medicines.append(", ");
-                                           }
-                                       }
+                                        for (int j = 0; j < medReminderModelList.size(); j++) {
+                                            MedReminderModel i = medReminderModelList.get(j);
+                                            medicines.append(i.getEldersMedName());
+                                            if (j < medReminderModelList.size() - 1) {
+                                                medicines.append(", ");
+                                            }
+                                        }
 
-                                       //Now we gonna set those values
-                                       generateReportBinding.reportMedicines.setText(medicines);
-                                       generateReportBinding.generateReportProgressBar.setVisibility(View.GONE);
-                                       generateReportBinding.root.setVisibility(View.VISIBLE);
-                                   }
-                               })
-                               .addOnFailureListener(fail->{
-                                   Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
-                               });
-                   }
+                                        //Now we gonna set those values
+                                        generateReportBinding.reportMedicines.setText(medicines);
+                                        generateReportBinding.generateReportProgressBar.setVisibility(View.GONE);
+                                        generateReportBinding.root.setVisibility(View.VISIBLE);
+                                    }
+                                })
+                                .addOnFailureListener(fail -> {
+                                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+                                });
+                    }
                 })
-                .addOnFailureListener(fail->{
+                .addOnFailureListener(fail -> {
                     Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
                 });
     }
 
-    private void listeners(){
+    private void listeners() {
 
         //Back btn func
-        generateReportBinding.reportGenerateBack.setOnClickListener(v->finish());
+        generateReportBinding.reportGenerateBack.setOnClickListener(v -> finish());
 
         //Download
-        generateReportBinding.reportDownload.setOnClickListener(v->download());
+        generateReportBinding.reportDownload.setOnClickListener(v -> download());
 
         //Symptoms Generate
-        generateReportBinding.reportSymGenerate.setOnClickListener(v->{
+        generateReportBinding.reportSymGenerate.setOnClickListener(v -> {
             loading();
             String sym = generateReportBinding.reportSymInput.getEditText().getText().toString();
-            if(sym.isEmpty()){
+            if (sym.isEmpty()) {
                 generateReportBinding.reportSymInput.setError("Enter Symptoms of your Elder");
                 unLoading();
-            }
-            else {
+            } else {
                 generateReportBinding.reportSym.setText(sym);
                 generateReportBinding.reportSymInput.setVisibility(View.GONE);
                 generateReportBinding.reportSymGenerate.setVisibility(View.GONE);
@@ -132,12 +133,12 @@ public class GenerateReportActivity extends AppCompatActivity {
         });
     }
 
-    private void loading(){
+    private void loading() {
         generateReportBinding.reportSymGenerate.setVisibility(View.GONE);
         generateReportBinding.reportSymProgress.setVisibility(View.VISIBLE);
     }
 
-    private void unLoading(){
+    private void unLoading() {
         generateReportBinding.reportSymGenerate.setVisibility(View.VISIBLE);
         generateReportBinding.reportSymProgress.setVisibility(View.GONE);
     }
@@ -146,10 +147,13 @@ public class GenerateReportActivity extends AppCompatActivity {
         // Create a PdfDocument instance
         PdfDocument pdfDocument = new PdfDocument();
 
+        // Get the page size based on standard A4 paper (in pixels)
+        int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 210, getResources().getDisplayMetrics());
+        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 297, getResources().getDisplayMetrics());
         // Create a page description
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(
-                generateReportBinding.root.getWidth(),
-                generateReportBinding.root.getHeight(),
+                width,
+                height,
                 1
         ).create();
 
@@ -158,21 +162,36 @@ public class GenerateReportActivity extends AppCompatActivity {
 
         // Draw the view onto the page's Canvas
         Canvas canvas = page.getCanvas();
+        // Adjust the position and size of your view to fit within the canvas
+        float scaleX = (float) width / generateReportBinding.root.getWidth();
+        float scaleY = (float) height / generateReportBinding.root.getHeight();
+
+// Scale the view to fit proportionally within the full-size page
+        canvas.scale(scaleX, scaleY);
+
+// Draw the scaled view onto the canvas
         generateReportBinding.root.draw(canvas);
 
         // Finish the page
         pdfDocument.finishPage(page);
 
         // Save the PDF document to a file
-        File pdfFile = new File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), generateFileName());
-        try {
-            pdfDocument.writeTo(new FileOutputStream(pdfFile));
-            Toast.makeText(this, "PDF saved to: " + pdfFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
-            Log.d("fileLoc",pdfFile.getAbsolutePath());
-            pdfDocument.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Failed to save PDF", Toast.LENGTH_SHORT).show();
+        File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        if (downloadsDir != null && downloadsDir.exists()) {
+            String fileName = generateFileName();
+            File pdfFile = new File(downloadsDir, fileName);
+            try {
+                pdfDocument.writeTo(new FileOutputStream(pdfFile));
+                Toast.makeText(this, "PDF saved to: " + pdfFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+                Log.d("fileLoc", pdfFile.getAbsolutePath());
+                pdfDocument.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Failed to save PDF", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            // Handle the case where Downloads directory is not accessible
+            Log.w("TAG", "Downloads directory not accessible");
         }
     }
 

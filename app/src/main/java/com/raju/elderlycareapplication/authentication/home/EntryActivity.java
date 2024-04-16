@@ -1,10 +1,8 @@
 package com.raju.elderlycareapplication.authentication.home;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-
 import com.raju.elderlycareapplication.R;
 import com.raju.elderlycareapplication.authentication.caretakers.SignInCareTakersActivity;
 import com.raju.elderlycareapplication.authentication.elder.SignInEldersActivity;

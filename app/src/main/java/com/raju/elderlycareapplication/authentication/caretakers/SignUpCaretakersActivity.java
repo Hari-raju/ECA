@@ -60,7 +60,7 @@ public class SignUpCaretakersActivity extends AppCompatActivity {
                                         .get()
                                         .addOnCompleteListener(task1 -> {
                                             if (task1.getResult()!=null && task1.isSuccessful()) {
-                                                if (task1.getResult().getDocuments().size()>0) {
+                                                if (!task1.getResult().getDocuments().isEmpty()) {
                                                     // Number found in elder collection
                                                     unloading();
                                                     Toast.makeText(this, "Number is already registered as elder, please sign in", Toast.LENGTH_LONG).show();
@@ -68,8 +68,8 @@ public class SignUpCaretakersActivity extends AppCompatActivity {
                                                     // Number not found in either collection, proceed to next activity
                                                     unloading();
                                                     CaretakerModel caretakerModel = new CaretakerModel(
+                                                            caretakersBinding.caretakerSignupUsername.getEditText().getText().toString(),
                                                             phoneNumber,
-                                                            caretakersBinding.caretakerSignupCountycode.getFullNumberWithPlus(),
                                                             Objects.requireNonNull(caretakersBinding.caretakerSignupPass.getEditText()).getText().toString()
                                                     );
                                                     Intent intent = new Intent(SignUpCaretakersActivity.this, OtpActivity.class);

@@ -1,20 +1,20 @@
 package com.raju.elderlycareapplication.authentication.elder;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -27,24 +27,15 @@ import com.raju.elderlycareapplication.helpers.user_models.ReminderModel;
 import com.raju.elderlycareapplication.helpers.utils.Constants;
 import com.raju.elderlycareapplication.helpers.utils.EncoderDecoder;
 import com.raju.elderlycareapplication.helpers.utils.PreferenceManager;
-import com.raju.elderlycareapplication.helpers.utils.notifications.ApiClient;
-import com.raju.elderlycareapplication.helpers.utils.notifications.ApiService;
-import com.raju.elderlycareapplication.reminder_display.background_services.MedReminderService;
 import com.raju.elderlycareapplication.helpers.utils.notifications.NotificationUtils;
+import com.raju.elderlycareapplication.reminder_display.background_services.MedReminderService;
 import com.raju.elderlycareapplication.services.sensors.FallDetectionService;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ElderHomeActivity extends AppCompatActivity {
 
@@ -100,7 +91,10 @@ public class ElderHomeActivity extends AppCompatActivity {
                     if (task.getResult() != null && task.isSuccessful() && !task.getResult().getDocuments().isEmpty()) {
                         DocumentSnapshot doc = task.getResult().getDocuments().get(0);
                         ReminderModel model = doc.toObject(ReminderModel.class);
-                        List<MedReminderModel> medReminderModelList = model.getListModel();
+                        List<MedReminderModel> medReminderModelList = null;
+                        if (model != null) {
+                            medReminderModelList = model.getListModel();
+                        }
                         Toast.makeText(this, "Serializing..", Toast.LENGTH_SHORT).show();
 
                         try {
@@ -146,6 +140,15 @@ public class ElderHomeActivity extends AppCompatActivity {
                         finish();
                     })
                     .addOnFailureListener(res -> Toast.makeText(this, res.getLocalizedMessage(), Toast.LENGTH_SHORT).show());
+        });
+
+        homeBinding.call.setOnClickListener(v->{
+            if(ContextCompat.checkSelfPermission(this,Manifest.permission.CALL_PHONE)==PackageManager.PERMISSION_GRANTED){
+                callCaretaker();
+            }
+            else{
+                callPerm.launch(Manifest.permission.CALL_PHONE);
+            }
         });
     }
 
@@ -333,4 +336,21 @@ public class ElderHomeActivity extends AppCompatActivity {
                     getConnectedCaretaker();
                 }
             });
+
+    private final ActivityResultLauncher<String> callPerm = registerForActivityResult(new ActivityResultContracts.RequestPermission(),
+            isGranted->{
+                if(isGranted){
+                    callCaretaker();
+                }
+                else{
+                    Toast.makeText(this, "Allow calls to call caretaker", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+    private void callCaretaker(){
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:"+preferenceManager.getString(Constants.KEY_CONNECTED_CARETAKER)));
+        startActivity(intent);
+        Toast.makeText(this, preferenceManager.getString(Constants.KEY_CONNECTED_CARETAKER), Toast.LENGTH_SHORT).show();
+    }
 }
